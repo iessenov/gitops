@@ -1,0 +1,5 @@
+apiVersion: v2
+name: whoami
+version: 0.1.0
+description: Simple whoami demo app
+type: application
