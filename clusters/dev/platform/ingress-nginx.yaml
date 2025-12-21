@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/iessenov/gitops
     targetRevision: main
     path: platform/ingress-nginx/overlays/dev
+    kustomize:
+      enableHelm: true
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
