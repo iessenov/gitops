@@ -4,8 +4,3 @@ kind: Kustomization
 resources:
   - ../../base
   - ingress.yaml
-
-helmCharts:
-  - name: whoami
-    path: ../../chart
-    valuesFile: values-dev.yaml
