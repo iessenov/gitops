@@ -3,14 +3,18 @@ kind: Application
 metadata:
   name: ingress-nginx-dev
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/kustomize-enable-helm: "true"
 spec:
   project: default
   source:
-    repoURL: https://github.com/iessenov/gitops
-    targetRevision: main
-    path: platform/ingress-nginx/overlays/dev
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: 4.10.0
+    helm:
+      releaseName: ingress-nginx
+      values: |
+        controller:
+          service:
+            type: NodePort
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx

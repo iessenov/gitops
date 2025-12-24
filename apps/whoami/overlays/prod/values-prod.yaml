@@ -1,4 +1,0 @@
-replicaCount: 3
-service:
-  type: LoadBalancer
-  port: 80

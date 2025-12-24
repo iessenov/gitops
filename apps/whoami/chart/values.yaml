@@ -10,3 +10,8 @@ service:
   port: 80
 
 fullnameOverride: whoami
+
+ingress:
+  enabled: true
+  path: /
+  className: nginx
