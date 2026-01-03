@@ -5,16 +5,22 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://kubernetes.github.io/ingress-nginx
-    chart: ingress-nginx
-    targetRevision: 4.11.0   # or latest stable
-    helm:
-      valueFiles:
-        - values.yaml
+  sources:
+    - repoURL: https://kubernetes.github.io/ingress-nginx
+      chart: ingress-nginx
+      targetRevision: 4.11.0
+      helm:
+        valueFiles:
+          - $values/infrastructure/ingress-nginx-apps/values.yaml
+
+    - repoURL: https://github.com/iessenov/gitops.git
+      targetRevision: HEAD
+      ref: values
+
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx-apps
+
   syncPolicy:
     automated:
       prune: true
