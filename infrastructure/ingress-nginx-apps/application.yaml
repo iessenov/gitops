@@ -1,19 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root
+  name: ingress-nginx-apps
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/iessenov/gitops.git
     targetRevision: main
-    path: .
-    directory:
-      recurse: true  #if the folder contains only subfolders, Argo CD sees it as “empty”.
+    path: infrastructure/ingress-nginx-apps
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: ingress-nginx-apps
   syncPolicy:
     automated:
       prune: true
