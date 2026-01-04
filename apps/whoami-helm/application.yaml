@@ -7,9 +7,9 @@ spec:
   project: default
 
   sources:
-    - repoURL: https://carlosedp.github.io/helm-charts
+    - repoURL: https://cowboysysop.github.io/charts/
       chart: whoami
-      targetRevision: 0.1.2
+      targetRevision: 6.0.0
       helm:
         valueFiles:
           - $values/apps/whoami-helm/values.yaml
