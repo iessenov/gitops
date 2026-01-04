@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: whoami-helm
   namespace: whoami-helm
-  annotations:
-    kubernetes.io/ingress.class: ingress-nginx-apps
 spec:
   ingressClassName: ingress-nginx-apps
   rules:
