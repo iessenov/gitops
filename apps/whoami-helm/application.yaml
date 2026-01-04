@@ -7,7 +7,7 @@ spec:
   project: default
 
   sources:
-    - repoURL: oci://ghcr.io/carlosedp/helm-charts
+    - repoURL: https://carlosedp.github.io/helm-charts
       chart: whoami
       targetRevision: 0.1.2
       helm:
