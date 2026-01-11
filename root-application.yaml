@@ -12,6 +12,7 @@ spec:
     directory:
       recurse: true  #if the folder contains only subfolders, Argo CD sees it as “empty”.
       exclude: '{nginx-app/**}' # exclude nginx-app directory if not a Helm chart application
+  destination:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
