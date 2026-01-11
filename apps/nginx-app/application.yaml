@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/iessenov/gitops.git
     targetRevision: main
-    path: apps/nginx-app
+    path: apps/nginx-app/manifests
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
