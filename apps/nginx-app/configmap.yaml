@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-content
+  namespace: nginx-app
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head><title>Nginx app page</title></head>
+    <body><h1>Got lost?</h1></body>
+    </html>
