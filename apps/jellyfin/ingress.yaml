@@ -3,8 +3,9 @@ kind: Ingress
 metadata:
   name: jellyfin
   namespace: media
-  annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.100.0/24"
+#  annotations:
+#    nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.100.0/24"
+#    nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
 spec:
   ingressClassName: ingress-nginx-apps
   rules:
@@ -17,4 +18,4 @@ spec:
           service:
             name: jellyfin
             port:
-              number: 8096
+              number: 80
