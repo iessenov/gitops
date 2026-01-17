@@ -1,0 +1,53 @@
+image:
+  repository: jellyfin/jellyfin
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 8096
+
+persistence:
+  config:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 5Gi
+    storageClass: local-path
+  cache:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 5Gi
+    storageClass: local-path
+  media:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 1Ti
+    storageClass: local-path
+    mountPath: /media
+
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "1Gi"
+  limits:
+    cpu: "4"
+    memory: "4Gi"
+
+nodeSelector:
+  jellyfin: "true"
+
+extraVolumes:
+  - name: dri
+    hostPath:
+      path: /dev/dri
+
+extraVolumeMounts:
+  - name: dri
+    mountPath: /dev/dri
