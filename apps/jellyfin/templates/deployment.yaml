@@ -7,7 +7,7 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: 8096
+      targetPort: {{ .Values.service.containerPort }}
       protocol: TCP
   selector:
     app: jellyfin
@@ -36,7 +36,7 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: 8096
+        - containerPort: {{ .Values.service.containerPort }}
           name: http
         resources:
           {{- toYaml .Values.resources | nindent 12 }}

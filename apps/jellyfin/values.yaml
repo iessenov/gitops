@@ -7,7 +7,8 @@ replicaCount: 1
 
 service:
   type: ClusterIP
-  port: 8096
+  port: 80
+  containerPort: 8096
 
 persistence:
   config:
