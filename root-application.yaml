@@ -11,7 +11,8 @@ spec:
     path: .
     directory:
       recurse: true  #if the folder contains only subfolders, Argo CD sees it as "empty".
-      include: '**/application.yaml'
+      include: '{**/application.yaml,root-application.yaml}'
+      exclude: '{apps/**/templates/**,apps/whoami/**,apps/jellyfin/**,apps/syncthing/**,apps/nginx-app/manifests/**,infrastructure/**}'
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
