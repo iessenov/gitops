@@ -27,3 +27,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true # ServerSideApply=true tells ArgoCD to use Kubernetes' server-side apply mechanism, which handles conflicts gracefully when resources already exist. This prevents the "already exists" error.
