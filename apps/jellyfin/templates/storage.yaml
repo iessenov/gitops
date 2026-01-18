@@ -72,7 +72,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   local:
-    path: /var/lib/jellyfin/media
+    path: /var/lib/jellyfin/media #move this out of /var/lib > /data/media
   nodeAffinity:
     required:
       nodeSelectorTerms:

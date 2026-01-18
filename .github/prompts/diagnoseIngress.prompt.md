@@ -1,3 +1,5 @@
+#/savePrompt summarize the current chat: Describe the problem, the sympthoms, how did we troubleshoot step by step chronologically, include the terminal comands we used, the expected result and the clue from the actual result that helped diagnose the issue.
+
 ---
 name: diagnoseIngressRouting
 description: Debug ArgoCD-managed ingress 404 errors with chronological troubleshooting steps and commands
