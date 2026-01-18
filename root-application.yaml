@@ -11,7 +11,7 @@ spec:
     path: .
     directory:
       recurse: true  #if the folder contains only subfolders, Argo CD sees it as "empty".      
-      exclude: 'apps/nginx-app/manifests/**,apps/whoami/**,apps/*/templates/**'
+      exclude: '{apps/nginx-app/manifests/**,apps/whoami/**,apps/*/templates/**}'
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
