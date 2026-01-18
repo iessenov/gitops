@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: syncthing
   namespace: argocd
+  annotations:
+    cache-bust: "2"
 spec:
   project: default
 
