@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: syncthing-config
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   accessModes:
     - {{ .Values.persistence.config.accessMode }}
@@ -15,7 +15,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: syncthing-data
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   accessModes:
     - {{ .Values.persistence.data.accessMode }}
