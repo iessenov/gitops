@@ -1,3 +1,5 @@
+namespace: syncthing
+
 image:
   repository: syncthing/syncthing
   tag: latest
