@@ -10,8 +10,8 @@ spec:
     targetRevision: main
     path: .
     directory:
-      recurse: true  #if the folder contains only subfolders, Argo CD sees it as "empty".      
-      exclude: '{apps/nginx-app/manifests/**,apps/whoami/**,apps/*/templates/**}'
+      recurse: true  # if the folder contains only subfolders, Argo CD sees it as "empty".
+      include: '{**/application.yaml,**/Application.yaml}'
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
