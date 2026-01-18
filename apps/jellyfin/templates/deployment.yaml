@@ -27,10 +27,14 @@ spec:
       labels:
         app: jellyfin
     spec:
+      {{- with .Values.nodeSelector }}
       nodeSelector:
-        {{- toYaml .Values.nodeSelector | nindent 8 }}
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.securityContext }}
       securityContext:
-        {{- toYaml .Values.securityContext | nindent 8 }}
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
       - name: jellyfin
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -47,7 +51,9 @@ spec:
           mountPath: /cache
         - name: media
           mountPath: /media
-        {{- toYaml .Values.extraVolumeMounts | nindent 8 }}
+        {{- with .Values.extraVolumeMounts }}
+{{ toYaml . | indent 8 }}
+        {{- end }}
       volumes:
       - name: config
         persistentVolumeClaim:
@@ -58,7 +64,9 @@ spec:
       - name: media
         persistentVolumeClaim:
           claimName: jellyfin-media
-      {{- toYaml .Values.extraVolumes | nindent 6 }}
+      {{- with .Values.extraVolumes }}
+{{ toYaml . | indent 6 }}
+      {{- end }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
