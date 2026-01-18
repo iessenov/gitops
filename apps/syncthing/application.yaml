@@ -4,7 +4,7 @@ metadata:
   name: syncthing
   namespace: argocd
   annotations:
-    cache-bust: "2"
+    cache-bust: "3"
 spec:
   project: default
 
