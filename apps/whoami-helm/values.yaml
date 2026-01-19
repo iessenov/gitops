@@ -7,6 +7,7 @@ service:
 ingress:
   enabled: true
   className: ingress-nginx-apps
+  annotations: {}
   hosts:
     - host: whoami-helm.essenov.com
       paths:
