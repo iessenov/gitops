@@ -5,6 +5,7 @@ metadata:
 provisioner: rancher.io/local-path
 volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
+reclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
