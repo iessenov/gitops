@@ -16,17 +16,20 @@ persistence:
     accessMode: ReadWriteOnce
     size: 5Gi
     storageClass: local-path
+    volumeName: jellyfin-config-pv
   cache:
     enabled: true
     accessMode: ReadWriteOnce
     size: 5Gi
     storageClass: local-path
+    volumeName: jellyfin-cache-pv
   media:
     enabled: true
     accessMode: ReadWriteOnce
     size: 1Ti
     storageClass: local-path
     mountPath: /media
+    volumeName: jellyfin-media-pv
 
 securityContext:
   runAsUser: 1000

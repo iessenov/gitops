@@ -77,6 +77,7 @@ spec:
   accessModes:
     - {{ .Values.persistence.config.accessMode }}
   storageClassName: {{ .Values.persistence.config.storageClass }}
+  volumeName: {{ .Values.persistence.config.volumeName | default "jellyfin-config-pv" }}
   resources:
     requests:
       storage: {{ .Values.persistence.config.size }}
@@ -90,6 +91,7 @@ spec:
   accessModes:
     - {{ .Values.persistence.cache.accessMode }}
   storageClassName: {{ .Values.persistence.cache.storageClass }}
+  volumeName: {{ .Values.persistence.cache.volumeName | default "jellyfin-cache-pv" }}
   resources:
     requests:
       storage: {{ .Values.persistence.cache.size }}
@@ -103,6 +105,7 @@ spec:
   accessModes:
     - {{ .Values.persistence.media.accessMode }}
   storageClassName: {{ .Values.persistence.media.storageClass }}
+  volumeName: {{ .Values.persistence.media.volumeName | default "jellyfin-media-pv" }}
   resources:
     requests:
       storage: {{ .Values.persistence.media.size }}
