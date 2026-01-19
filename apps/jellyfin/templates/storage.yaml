@@ -18,7 +18,7 @@ metadata:
   name: jellyfin-config-pv
 spec:
   capacity:
-    storage: 5Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   storageClassName: local-path
