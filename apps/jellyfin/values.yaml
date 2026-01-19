@@ -14,7 +14,7 @@ persistence:
   config:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 5Gi
+    size: 1Gi
     storageClass: local-path
     volumeName: jellyfin-config-pv
   cache:
