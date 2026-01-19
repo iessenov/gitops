@@ -18,6 +18,12 @@ spec:
       targetRevision: HEAD
       ref: values
 
+    - repoURL: https://github.com/iessenov/gitops.git
+      path: apps/whoami-helm
+      targetRevision: main
+      directory:
+        include: 'ingress.yaml'
+
   destination:
     server: https://kubernetes.default.svc
     namespace: whoami-helm

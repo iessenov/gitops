@@ -5,9 +5,8 @@ service:
   port: 80
 
 ingress:
-  enabled: true
+  enabled: false
   className: ingress-nginx-apps
-  annotations: {}
   hosts:
     - host: whoami-helm.essenov.com
       paths:
