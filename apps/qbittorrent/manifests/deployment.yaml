@@ -13,6 +13,8 @@ spec:
       labels:
         app: qbittorrent
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
       - name: qbittorrent
         image: qbittorrentofficial/qbittorrent-nox:latest
@@ -61,7 +63,6 @@ spec:
           readOnlyRootFilesystem: false
           runAsUser: 1000
           runAsGroup: 1000
-          fsGroup: 1000
       volumes:
       - name: config
         persistentVolumeClaim:
