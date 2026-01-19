@@ -71,7 +71,7 @@ spec:
     required:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: qbtorrent
+        - key: qbittorrent
           operator: In
           values:
           - "true"
