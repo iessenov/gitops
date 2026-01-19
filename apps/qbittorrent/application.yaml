@@ -11,7 +11,6 @@ spec:
     path: apps/qbittorrent/manifests
   destination:
     server: https://kubernetes.default.svc
-    namespace: qbittorrent
   syncPolicy:
     automated:
       prune: true
