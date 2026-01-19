@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/iessenov/gitops.git
     targetRevision: main
-    path: .
+    path: apps
     directory:
       recurse: true  #if the folder contains only subfolders, Argo CD sees it as "empty".
       include: '**/application.yaml'
