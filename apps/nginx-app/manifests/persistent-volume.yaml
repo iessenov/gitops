@@ -17,7 +17,7 @@ spec:
         - key: nginx-app
           operator: In
           values:
-          - "dev"  
+          - "true"  
   persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
