@@ -14,7 +14,7 @@ spec:
     required:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: ngixn-app
+        - key: nginx-app
           operator: In
           values:
           - "dev"  
