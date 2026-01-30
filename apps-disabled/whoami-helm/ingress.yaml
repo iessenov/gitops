@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami-helm
+  namespace: whoami-helm
+spec:
+  ingressClassName: ingress-nginx-apps
+  rules:
+  - host: whoami-helm.essenov.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: whoami-helm
+            port:
+              number: 80

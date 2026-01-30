@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent
+  namespace: qbittorrent
+#  annotations:
+#    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: ingress-nginx-apps
+#  tls:
+#  - hosts:
+#    - qbt.essenov.com
+#    secretName: qbittorrent-tls
+  rules:
+  - host: qbt.essenov.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: qbittorrent-webui
+            port:
+              number: 80

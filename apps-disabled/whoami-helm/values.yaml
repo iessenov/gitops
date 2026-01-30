@@ -1,0 +1,15 @@
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ingress-nginx-apps
+  hosts:
+    - host: whoami-helm.essenov.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []

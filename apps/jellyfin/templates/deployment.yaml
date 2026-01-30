@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.containerPort }}
+      protocol: TCP
+  selector:
+    app: jellyfin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.securityContext }}
+      securityContext:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      containers:
+      - name: jellyfin
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.containerPort }}
+          name: http
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: cache
+          mountPath: /cache
+        - name: media
+          mountPath: /media
+        {{- with .Values.extraVolumeMounts }}
+{{ toYaml . | indent 8 }}
+        {{- end }}
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: jellyfin-config
+      - name: cache
+        persistentVolumeClaim:
+          claimName: jellyfin-cache
+      - name: media
+        persistentVolumeClaim:
+          claimName: jellyfin-media
+      {{- with .Values.extraVolumes }}
+{{ toYaml . | indent 6 }}
+      {{- end }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-config
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.config.accessMode }}
+  storageClassName: {{ .Values.persistence.config.storageClass }}
+  volumeName: {{ .Values.persistence.config.volumeName | default "jellyfin-config-pv" }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.config.size }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-cache
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.cache.accessMode }}
+  storageClassName: {{ .Values.persistence.cache.storageClass }}
+  volumeName: {{ .Values.persistence.cache.volumeName | default "jellyfin-cache-pv" }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.cache.size }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-media
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.media.accessMode }}
+  storageClassName: {{ .Values.persistence.media.storageClass }}
+  volumeName: {{ .Values.persistence.media.volumeName | default "jellyfin-media-pv" }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.media.size }}

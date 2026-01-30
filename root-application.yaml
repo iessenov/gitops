@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/iessenov/gitops.git
+    targetRevision: main
+    path: .
+    directory:
+      recurse: true  # If the folder contains only subfolders, Argo CD sees it as "empty"
+      include: '**/application.yaml'
+      exclude: 'apps-disabled/**/application.yaml'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -1,0 +1,34 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-path-wffc
+provisioner: rancher.io/local-path
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: syncthing-config
+  namespace: {{ .Values.namespace }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.config.accessMode }}
+  storageClassName: {{ .Values.persistence.config.storageClass }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.config.size }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: syncthing-data
+  namespace: {{ .Values.namespace }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.data.accessMode }}
+  storageClassName: {{ .Values.persistence.data.storageClass }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.data.size }}

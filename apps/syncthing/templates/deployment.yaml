@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing
+  namespace: {{ .Values.namespace }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.containerPort }}
+      protocol: TCP
+    - name: sync
+      port: {{ .Values.service.syncPort }}
+      targetPort: {{ .Values.service.syncPort }}
+      protocol: TCP
+    - name: discovery
+      port: {{ .Values.service.discoveryPort }}
+      targetPort: {{ .Values.service.discoveryPort }}
+      protocol: UDP
+  selector:
+    app: syncthing
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: syncthing
+  template:
+    metadata:
+      labels:
+        app: syncthing
+    spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.securityContext | nindent 8 }}
+      containers:
+      - name: syncthing
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.containerPort }}
+          name: http
+        - containerPort: {{ .Values.service.syncPort }}
+          name: sync
+          protocol: TCP
+        - containerPort: {{ .Values.service.discoveryPort }}
+          name: discovery
+          protocol: UDP
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        volumeMounts:
+        - name: config
+          mountPath: /var/syncthing/config
+        - name: data
+          mountPath: /var/syncthing
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: syncthing-config
+      - name: data
+        persistentVolumeClaim:
+          claimName: syncthing-data

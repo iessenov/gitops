@@ -1,0 +1,83 @@
+---
+# Local storage class
+# NOTE: Usually pre-installed in k3s/microk8s
+# If using microk8s: microk8s enable hostpath-storage
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-path
+provisioner: rancher.io/local-path
+allowVolumeExpansion: true
+---
+# PV for Jellyfin config
+# FOLDER TO CREATE: /var/lib/jellyfin/config
+# Store Jellyfin settings, libraries, and configurations
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jellyfin-config-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  local:
+    path: /var/lib/jellyfin/config
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: jellyfin
+          operator: In
+          values:
+          - "true"
+---
+# PV for Jellyfin cache
+# FOLDER TO CREATE: /var/lib/jellyfin/cache
+# Store cached/transcoded media files (can be regenerated)
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jellyfin-cache-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  local:
+    path: /var/lib/jellyfin/cache
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: jellyfin
+          operator: In
+          values:
+          - "true"
+# FOLDER TO CREATE: /var/lib/jellyfin/media
+# Store your actual media files (movies, shows, music, etc.)
+# This folder should contain your media library or be symlinked to your media drive
+---
+# PV for Jellyfin media
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jellyfin-media-pv
+spec:
+  capacity:
+    storage: 1Ti
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  local:
+    path: /data/media #move this out of /var/lib > /data/media
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: jellyfin
+          operator: In
+          values:
+          - "true"

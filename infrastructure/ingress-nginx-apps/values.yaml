@@ -1,0 +1,29 @@
+controller:
+  ingressClassResource:
+    name: ingress-nginx-apps
+    controllerValue: "k8s.io/ingress-nginx-apps"
+    enabled: true
+    default: false
+
+  ingressClass: ingress-nginx-apps
+  extraArgs:
+    controller-class: "k8s.io/ingress-nginx-apps"
+
+  hostPort:
+    enabled: true
+    ports:
+      http: 80
+      https: 443
+
+  service:
+    enabled: false
+
+  kind: DaemonSet
+
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"
+      effect: "NoSchedule"

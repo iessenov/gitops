@@ -1,0 +1,124 @@
+b939bdf (HEAD -> main, origin/main) 	renamed:    infrastructure/ingress-nginx-apps/application.yaml.disable -> infrastructure/ingress-nginx-apps/application.yaml
+6d7a302 	modified:   root-application.yaml replaced two listed exclusions with a single exclude pattern apps-disabled/**/application.yaml
+fee020a 	modified:   apps/nginx-app/application.yaml 	modified:   apps/qbittorrent/application.yaml
+47f291d 	renamed:    infrastructure/ingress-nginx-apps/application.yaml -> infrastructure/ingress-nginx-apps/application.yaml.disable
+27449d5 	modified:   root-application.yaml
+b77f11a enable recursion 	modified:   root-application.yaml
+27334a9 	modified:   root-application.yaml
+8cfa819 	modified:   root-application.yaml
+f9c974d 	new file:   infrastructure/ingress-nginx-apps/application-new.yaml 	modified:   infrastructure/ingress-nginx-apps/application.yaml
+e18e430 	modified:   root-application.yaml
+30a8c4a 	modified:   root-application.yaml
+23ced81 	modified:   root-application.yaml remove the recurse and add ../infrastructure/ingress-nginx-apps/application.yaml to include
+5af4860 	modified:   root-application.yaml
+6f5901b 	modified:   root-application.yaml fix the exclude to match a yaml, not a directory. It is commented anyway.
+55a61d2 	modified:   infrastructure/ingress-nginx-apps/application.yaml
+b7fdfc1 Removed targetRevision: main from the second source. When using ref to reference a repository for $values substitution, you don't specify a targetRevision on that source entry—the values will be pulled from the repo without a specific revision constraint. 	modified:   infrastructure/ingress-nginx-apps/application.yaml
+6511e1c Changed targetRevision: HEAD to targetRevision: main. 	modified:   infrastructure/ingress-nginx-apps/application.yaml
+22ad8b7 Merge branch 'main' of https://github.com/iessenov/gitops
+4ee0438 	modified:   infrastructure/ingress-nginx-apps/application.yaml
+86cff70 space after sharp comment sign	modified:   root-application.yaml
+562284e remove the '{}'' in the exclude statement	modified:   root-application.yaml
+f6b05c7 label the node "true" for nginx-app PV node affinity 	modified:   apps/nginx-app/manifests/persistent-volume.yaml
+f703951 fixing a typo 	modified:   apps/nginx-app/manifests/persistent-volume.yaml
+520030d 	modified:   apps/qbittorrent/application.yaml
+6583172 enable qbittorrent after migrating the config and data from the old server
+cf24cc2 add affinty to nginx pv 	modified:   apps/nginx-app/manifests/persistent-volume.yaml
+787630d 	modified:   apps/nginx-app/manifests/persistent-volume.yaml
+623c6cf add namespace to apps/nginx-app/manifests/persistent-volume.yaml
+11b6d8e disable qbittorrent app
+1e6f936 	modified:   apps/qbittorrent/application.yaml
+914327d 	modified:   apps/qbittorrent/manifests/deployment.yaml
+d998994 	modified:   apps/qbittorrent/manifests/persistent-volume.yaml mv /data/qbtorrent /data/qbittorrent
+1653d30 	modified:   apps/qbittorrent/manifests/configmap.yaml UMASK and TZ
+19ea18d 	modified:   apps/qbittorrent/manifests/deployment.yaml
+49b3fa2 readOnlyRootFilesystem: false
+2cad12d qbtorrent=true (typo - missing 'i')
+a70f77c add namespace manifest for qbittorrent 	modified:   apps/qbittorrent/application.yaml
+550e414 	modified:   apps/syncthing/templates/storage.yaml 	modified:   apps/qbittorrent/application.yaml
+d4df98d 	modified:   apps/qbittorrent/manifests/persistent-volume.yaml
+6b8e4e9 delete integrate syncthing storageclass.yaml into storage.yaml
+09709f9 Fix my github repo reference 	modified:   apps/qbittorrent/application.yaml
+6dde6f1 Add qbittorrent application
+13c56a0 remove excludes from root application to include all apps
+cbd57cc disable whoami, enable nginx-app
+063f41e 	new file:   apps/whoami/application.yaml
+1b6e563 	modified:   apps/jellyfin/values.yaml Reduced PVC for cache to 1 GB
+8de9bfb 	modified:   root-application.yaml
+bc4ba3b created apps-disabled directory and moved nginx-app and whoami-helm applications there to disable them. changed path of root in root-application.yaml from '.' to 'apps' and excluded disabled apps from being included.
+2df9a3a root: use glob pattern for exclude
+9ce20f8 	modified:   root-application.yaml exclude apps/nginx-app/application.yaml exclude apps/whoami-helm/application.yaml
+d72b30a 	new file:   apps/syncthing/templates/storageclass.yaml 	modified:   apps/syncthing/values.yaml
+48cec80 exclude apps/whoami-helm
+441e6e9 	modified:   apps/whoami-helm/application.yaml
+1d61801 	modified:   apps/whoami-helm/application.yaml 	modified:   apps/whoami-helm/values.yaml
+03f9f24 	modified:   apps/whoami-helm/values.yaml
+c76587b enable ingress for whoami-helm app
+697af76 exclude nginx-app from root application
+d6d5d9f 	modified:   apps/jellyfin/templates/storage.yaml 	modified:   apps/syncthing/values.yaml Config set to 1GB instead of 5GB
+5f90216 	modified:   apps/jellyfin/templates/deployment.yaml 	modified:   apps/jellyfin/values.yaml
+5463953 root: use only include to parse application.yaml files
+8eb2720 remove include, keep just exclude
+ce50856 add include and modify exclude patterns in root-application.yaml
+9553ad3 add apps/nginx-app/** to exclusion list again
+e1891d8 remove nginx-app from exclusion list
+d06093f exclude syncthing again
+95145e2 	modified:   root-application.yaml Remove syncthing from exclusion list
+460ae5e root: exclude syncthing to avoid parsing Helm templates
+261d6bd 	modified:   root-application.yaml
+5eda3e5 root: exclude templates, nginx-app, and whoami
+652b592 root: simplify to only exclude **/templates/** recursively
+69f3149 root: include only application.yaml files, exclude all templates and app dirs
+f2d8aad root: switch from exclude to include '**/application.yaml' to only render Application manifests
+a09fde3 root: use brace-comma glob excludes (templates,jellyfin,syncthing,whoami,nginx-app/manifests)
+f144bf6 root: fix directory.exclude to glob patterns (skip templates, jellyfin, syncthing, whoami)
+b8dfceb root: use regex exclude for templates and apps
+6e44d60 	modified:   root-application.yaml
+e89bc04 	modified:   root-application.yaml
+f5d1d30 root: exclude all Helm templates under apps
+0eb59f0 Limit root app to application.yaml files
+06f548c Fix directory.exclude glob with brace list
+b6acb80 Fix root app exclude patterns
+dd2f22e 	modified:   root-application.yaml
+edad7d5 Bump cache-bust to force re-render
+e0e858c 	modified:   apps/syncthing/application.yaml The cache-bust annotation will force ArgoCD to re-generate the manifests fresh instead of using the cached version.
+1e9bc35 	modified:   apps/syncthing/templates/ingress.yaml 	modified:   apps/syncthing/templates/storage.yaml  ingress.yaml and storage.yaml also had {{ .Release.Namespace }}. I've updated all three template files to use {{ .Values.namespace }} consistently.
+2d3807e 	modified:   apps/syncthing/templates/deployment.yaml 	modified:   apps/syncthing/values.yaml adding namespace to syncthing values.yaml
+6092032 	modified:   infrastructure/ingress-nginx-apps/application.yaml ServerSideApply=true tells ArgoCD to use Kubernetes' server-side apply mechanism, which handles conflicts gracefully when resources already exist. This prevents the "already exists" error.
+106f409 path: /var/lib/jellyfin/media #move this out of /var/lib > /data/media
+51bf816 Fixed the Helm template so optional sections don’t emit invalid YAML when empty. Wrapped nodeSelector, securityContext, extraVolumeMounts, and extraVolumes in with blocks in deployment.yaml, preventing the “invalid map key: .Release.Namespace” error.
+69955ca exclude apps/whoami leave whoami-helm in the business
+65a05fb Add syncthing app
+90e7773 moving the port to the values.yaml moving ingress, namespace, storage yaml files to templates directory
+b94d1af 	new file:   apps/jellyfin/Chart.yaml 	new file:   apps/jellyfin/templates/deployment.yaml
+e32d688 Changing the port to 80 and removing the annotation for nginx ingress controller
+088f3c8 add   apps/jellyfin/namespace.yaml
+5bfd242 Add jellyfin application
+05100ce Add storageClassName to PV and PVC 	modified:   apps/nginx-app/manifests/persistent-volume.yaml
+88f1105 make nginx host a site from persistent storage 	modified:   apps/nginx-app/manifests/deployment.yaml 	new file:   apps/nginx-app/manifests/nginx-config.yaml 	new file:   apps/nginx-app/manifests/persistent-volume.yaml
+baa49a7 	modified:   root-application.yaml
+076f20e moving the manifests into a sub-folder
+d01ee10 removed the exclusion of nginx-app directory from the root application to include it in Argo CD management.
+316ce50 Fix exclude pattern for nginx-app
+95696e6 restore destination section in root-application.yaml
+7057399 exclude nginx-app directory if not a Helm chart application to avoid SharedResourceWarning
+2fab792 Create nginx-app
+096100c 	new file:   .github/prompts/diagnoseIngress.prompt.md
+ec4c9f3 Remove the annotation
+2f8feb0 Added the ingress class annotation to ingress.yaml so the ingress-nginx-apps controller definitely picks it up.
+70160fe Add ingress for whoami-helm application
+ac174d9 disabled ingress for whoami-helm chart to use the local ingress-nginx-apps controller
+5fd64be downgrade to version 5.3.0 of whoami chart from cowboysysop repo
+f0944d0 Changing the whoami Helm repository to cowboysysop.github.io/charts and updating the chart version to 6.0.0
+53c2d50 pdated to use the Helm repository URL https://carlosedp.github.io/helm-charts instead of the OCI registry.
+ace5d11 	modified:   apps/whoami-helm/application.yaml       correct the repoURL: remove /whoami from the oci URL
+b043031 Add whoami-helm app
+1fcdbf7 Isolate ingress controllers with unique controller-class values
+b622174 app reading the local values file
+e281791 Switch whoami to ingress-nginx-apps
+dfa3415 CreateNamespace=true
+eb7635c fixing ingress-nginx-app to use remote helm repo instead of my repo
+b0d11d8 Add ingress-nginx-apps infrastructure
+1be2f1e Add root app
+21db67a whoami app
+cc25f1b Initial commit

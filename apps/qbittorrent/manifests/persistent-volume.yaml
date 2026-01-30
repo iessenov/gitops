@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qbittorrent-config
+  namespace: qbittorrent
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  volumeName: qbittorrent-config-pv
+  resources:
+    requests:
+      storage: 1Gi
+---      
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qbittorrent-config-pv
+  labels:
+    app: qbittorrent
+    volume: config
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /var/lib/qbittorrent/config # Adjust this path as needed.
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: qbittorrent
+          operator: In
+          values:
+          - "true"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qbittorrent-downloads
+  namespace: qbittorrent
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  volumeName: qbittorrent-downloads-pv
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qbittorrent-downloads-pv
+  labels:
+    app: qbittorrent
+    volume: downloads
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  persistentVolumeReclaimPolicy: Retain
+  local:
+    path: /data/qbittorrent/ # Adjust this path as needed. Check how to share it with Jellyfin.
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: qbittorrent
+          operator: In
+          values:
+          - "true"
+

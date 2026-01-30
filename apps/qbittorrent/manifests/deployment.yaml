@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: qbittorrent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: qbittorrent
+        image: qbittorrentofficial/qbittorrent-nox:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: webui
+          protocol: TCP
+        - containerPort: 6881
+          name: torrenting-tcp
+          protocol: TCP
+        - containerPort: 6881
+          name: torrenting-udp
+          protocol: UDP
+        envFrom:
+        - configMapRef:
+            name: qbittorrent-config
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: downloads
+          mountPath: /data/qbittorrent
+        - name: tmp
+          mountPath: /tmp
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 1000
+          runAsGroup: 1000
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: qbittorrent-config
+      - name: downloads
+        persistentVolumeClaim:
+          claimName: qbittorrent-downloads
+      - name: tmp
+        emptyDir: {}

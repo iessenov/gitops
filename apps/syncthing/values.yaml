@@ -1,0 +1,50 @@
+namespace: syncthing
+
+image:
+  repository: syncthing/syncthing
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 8384
+  syncPort: 22000
+  discoveryPort: 21027
+
+persistence:
+  config:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    storageClass: local-path-wffc
+  data:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 100Gi
+    storageClass: local-path-wffc
+
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "256Mi"
+  limits:
+    cpu: "2"
+    memory: "2Gi"
+
+nodeSelector: {}
+  # syncthing: "true"
+
+ingress:
+  enabled: true
+  host: syncthing.essenov.com
+  ingressClassName: ingress-nginx-apps
+  annotations: {}
+    # nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.100.0/24"
