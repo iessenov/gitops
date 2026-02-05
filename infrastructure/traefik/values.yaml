@@ -1,0 +1,97 @@
+# Traefik Helm Chart Values
+
+# Deployment configuration
+deployment:
+  enabled: true
+  replicas: 1
+  
+# Ports configuration
+ports:
+  web:
+    # HTTP port
+    port: 80
+    exposedPort: 80
+    expose: true
+    protocol: TCP
+  websecure:
+    # HTTPS port
+    port: 443
+    exposedPort: 443
+    expose: true
+    protocol: TCP
+    # Enable TLS by default
+    tls:
+      enabled: true
+  metrics:
+    # Prometheus metrics
+    port: 9100
+    expose: false
+    protocol: TCP
+
+# Enable dashboard (optional - disable in production)
+ingressRoute:
+  dashboard:
+    enabled: true
+    # Uncomment to expose dashboard via ingress
+    # matchRule: Host(`traefik.yourdomain.com`)
+    # entryPoints: ["websecure"]
+
+# Service configuration
+service:
+  enabled: true
+  type: LoadBalancer
+  # Or use NodePort if you don't have LoadBalancer
+  # type: NodePort
+
+# Logs
+logs:
+  general:
+    level: INFO
+  access:
+    enabled: true
+
+# Enable Prometheus metrics
+metrics:
+  prometheus:
+    enabled: true
+    addEntryPointsLabels: true
+    addServicesLabels: true
+
+# Providers
+providers:
+  kubernetesCRD:
+    enabled: true
+    allowCrossNamespace: true
+  kubernetesIngress:
+    enabled: true
+    allowExternalNameServices: true
+    publishedService:
+      enabled: true
+
+# Additional arguments
+additionalArguments:
+  # Enable access logs
+  - "--accesslog=true"
+  # Enable API and dashboard
+  - "--api.dashboard=true"
+
+# Resources (adjust as needed)
+resources:
+  requests:
+    cpu: "100m"
+    memory: "50Mi"
+  limits:
+    cpu: "300m"
+    memory: "150Mi"
+
+# Security context
+securityContext:
+  capabilities:
+    drop: [ALL]
+  readOnlyRootFilesystem: true
+  runAsGroup: 65532
+  runAsNonRoot: true
+  runAsUser: 65532
+
+podSecurityContext:
+  fsGroup: 65532
