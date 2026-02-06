@@ -2,14 +2,15 @@ replicaCount: 1
 
 service:
   type: ClusterIP
-  port: 80
+  ports:
+    http: 80
 
 ingress:
   enabled: true
-  className: traefik
+  ingressClassName: traefik
+  pathType: Prefix
   hosts:
     - host: whoami-helm.essenov.com
       paths:
-        - path: /
-          pathType: Prefix
+        - /
   tls: []
