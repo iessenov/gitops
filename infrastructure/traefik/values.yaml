@@ -12,14 +12,16 @@ ports:
     port: 8000
     exposedPort: 801
     hostPort: 801
-    expose: true
+    expose:
+      default: true
     protocol: TCP
   websecure:
     # HTTPS port
     port: 8443
     exposedPort: 4431
     hostPort: 4431
-    expose: true
+    expose:
+      default: true
     protocol: TCP
     # Enable TLS by default
     tls:
@@ -27,7 +29,8 @@ ports:
   metrics:
     # Prometheus metrics
     port: 9100
-    expose: false
+    expose:
+      default: false
     protocol: TCP
 
 # Enable dashboard (optional - disable in production)
