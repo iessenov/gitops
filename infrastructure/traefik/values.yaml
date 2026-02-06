@@ -2,21 +2,23 @@
 
 # Deployment configuration
 deployment:
+  kind: DaemonSet
   enabled: true
-  replicas: 1
   
 # Ports configuration
 ports:
   web:
-    # HTTP port
-    port: 80
-    exposedPort: 80
+    # HTTP port - using 801 to avoid collision with ingress-nginx
+    port: 8000
+    exposedPort: 801
+    hostPort: 801
     expose: true
     protocol: TCP
   websecure:
     # HTTPS port
-    port: 443
-    exposedPort: 443
+    port: 8443
+    exposedPort: 4431
+    hostPort: 4431
     expose: true
     protocol: TCP
     # Enable TLS by default
@@ -36,12 +38,9 @@ ingressRoute:
     # matchRule: Host(`traefik.yourdomain.com`)
     # entryPoints: ["websecure"]
 
-# Service configuration
+# Service configuration - disabled when using hostPort with DaemonSet
 service:
-  enabled: true
-  type: LoadBalancer
-  # Or use NodePort if you don't have LoadBalancer
-  # type: NodePort
+  enabled: false
 
 # Logs
 logs:
@@ -95,3 +94,12 @@ securityContext:
 
 podSecurityContext:
   fsGroup: 65532
+
+# Tolerations to run on control-plane nodes (same as ingress-nginx)
+tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
+  - key: "node-role.kubernetes.io/master"
+    operator: "Exists"
+    effect: "NoSchedule"
