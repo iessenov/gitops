@@ -5,8 +5,8 @@ service:
   port: 80
 
 ingress:
-  enabled: false
-  className: ingress-nginx-apps
+  enabled: true
+  className: traefik
   hosts:
     - host: whoami-helm.essenov.com
       paths:
