@@ -72,8 +72,6 @@ additionalArguments:
   - "--accesslog=true"
   # Enable API and dashboard
   - "--api.dashboard=true"
-  # Publish the traefik service IP in ingress status
-  - "--providers.kubernetesIngress.publishedservice=traefik/traefik"
 
 # Resources (adjust as needed)
 resources:
