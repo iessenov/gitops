@@ -1,45 +1,35 @@
 ---
-# Local storage class
-# NOTE: Usually pre-installed in k3s/microk8s
-# If using microk8s: microk8s enable hostpath-storage
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: local-path
-provisioner: rancher.io/local-path
-allowVolumeExpansion: true
----
-# PV for Jellyfin config
-# FOLDER TO CREATE: /var/lib/jellyfin/config
-# Store Jellyfin settings, libraries, and configurations
+# PV for Plex config
+# FOLDER TO CREATE: /var/lib/plex/config
+# Store Plex media server database and settings
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: jellyfin-config-pv
+  name: plex-config-pv
 spec:
   capacity:
-    storage: 1Gi
+    storage: 500Mi
   accessModes:
     - ReadWriteOnce
   storageClassName: local-path
   local:
-    path: /var/lib/jellyfin/config
+    path: /var/lib/plex/config
   nodeAffinity:
     required:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: jellyfin
+        - key: plex
           operator: In
           values:
           - "true"
 ---
-# PV for Jellyfin cache
-# FOLDER TO CREATE: /var/lib/jellyfin/cache
-# Store cached/transcoded media files (can be regenerated)
+# PV for Plex transcode
+# FOLDER TO CREATE: /var/lib/plex/transcode
+# Temporary storage for video transcoding
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: jellyfin-cache-pv
+  name: plex-transcode-pv
 spec:
   capacity:
     storage: 5Gi
@@ -47,23 +37,22 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   local:
-    path: /var/lib/jellyfin/cache
+    path: /var/lib/plex/transcode
   nodeAffinity:
     required:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: jellyfin
+        - key: plex
           operator: In
           values:
           - "true"
 ---
-# PV for Jellyfin media
-# FOLDER TO CREATE: /var/lib/jellyfin/media
-# Store your actual media files (movies, shows, music, etc.)
+# PV for Plex media
+# Your actual media files (movies, shows, music)
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: jellyfin-media-pv
+  name: plex-media-pv
 spec:
   capacity:
     storage: 2Ti
@@ -76,8 +65,7 @@ spec:
     required:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: jellyfin
+        - key: plex
           operator: In
           values:
           - "true"
-

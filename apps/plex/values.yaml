@@ -1,0 +1,35 @@
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  pathType: Prefix
+  hosts:
+    - host: plex.essenov.com
+      paths:
+        - /
+
+# -- Configure persistence settings for the chart under this key.
+# @default -- See values.yaml
+persistence:
+
+  config:
+    enabled: true
+    storageClass: local-path
+    size: 500Mi
+
+  transcode:
+    enabled: true
+    storageClass: local-path
+    size: 5Gi
+
+  media:
+    enabled: true
+    storageClass: local-path
+    mountPath: /media
+    size: 2Ti
+    volumeName: plex-media-pv
+
+# -- Enable devices to be discoverable
+hostNetwork: true
+
+env:
+  TZ: "Europe/Sofia"

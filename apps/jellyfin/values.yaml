@@ -19,14 +19,18 @@ persistence:
     volumeName: jellyfin-config-pv
   cache:
     enabled: true
-    accessMode: ReadWriteOnce
+    # ReadWriteOnce (RWO) access mode allows the PersistentVolume to be mounted
+    # as read-write by a single node at a time. This is the common choice for
+    # stateful applications like Jellyfin that require exclusive access to storage
+    # and don't need to be accessed simultaneously from multiple nodes.
+    accessMode: ReadWriteOnce 
     size: 5Gi
     storageClass: local-path
     volumeName: jellyfin-cache-pv
   media:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 1Ti
+    size: 2Ti
     storageClass: local-path
     mountPath: /media
     volumeName: jellyfin-media-pv

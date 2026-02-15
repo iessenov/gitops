@@ -1,26 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: whoami-helm
+  name: plex
   namespace: argocd
 spec:
   project: default
 
   sources:
-    - repoURL: https://cowboysysop.github.io/charts/
-      chart: whoami
-      targetRevision: 6.0.0
+    - repoURL: https://github.com/plexinc/pms-docker/charts/
+      chart: plex-media-server
+      targetRevision: 1.4.0
       helm:
         valueFiles:
-          - $values/apps/whoami-helm/values.yaml
-
+          - $values/apps/plex/values.yaml
     - repoURL: https://github.com/iessenov/gitops.git
       targetRevision: HEAD
       ref: values
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: whoami-helm
+    namespace: plex
 
   syncPolicy:
     automated:
