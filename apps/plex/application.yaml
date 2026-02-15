@@ -7,7 +7,7 @@ spec:
   project: default
 
   sources:
-    - repoURL: https://github.com/plexinc/pms-docker/charts/
+    - repoURL: https://github.com/plexinc/pms-docker/
       chart: plex-media-server
       targetRevision: 1.4.0
       helm:

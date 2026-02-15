@@ -1,14 +1,4 @@
----
-# Local storage class
-# NOTE: Usually pre-installed in k3s/microk8s
-# If using microk8s: microk8s enable hostpath-storage
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: local-path
-provisioner: rancher.io/local-path
-allowVolumeExpansion: true
----
+# NOTE: StorageClass is managed by infrastructure/storageclass
 # PV for Jellyfin config
 # FOLDER TO CREATE: /var/lib/jellyfin/config
 # Store Jellyfin settings, libraries, and configurations
