@@ -16,6 +16,9 @@ spec:
     - repoURL: https://github.com/iessenov/gitops.git
       targetRevision: HEAD
       ref: values
+    - repoURL: https://github.com/iessenov/gitops.git
+      path: apps/plex/manifests
+      targetRevision: main
 
   destination:
     server: https://kubernetes.default.svc
