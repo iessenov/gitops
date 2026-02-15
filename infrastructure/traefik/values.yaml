@@ -14,9 +14,6 @@ ports:
     # HTTPS port
     port: 443
     protocol: TCP
-    # Enable TLS by default
-    tls:
-      enabled: true
   metrics:
     # Prometheus metrics
     port: 9100
