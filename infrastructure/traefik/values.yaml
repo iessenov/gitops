@@ -63,6 +63,8 @@ providers:
     allowExternalNameServices: true
     publishedService:
       enabled: true
+      namespace: traefik
+      name: traefik
 
 # Additional arguments
 additionalArguments:
