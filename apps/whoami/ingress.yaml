@@ -4,7 +4,8 @@ metadata:
   name: whoami
   namespace: whoami
 spec:
-  ingressClassName: ingress-nginx-apps
+  #ingressClassName: ingress-nginx-apps
+  ingressClassName: traefik
   rules:
   - host: whoami.essenov.com
     http:
