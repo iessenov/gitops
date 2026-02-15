@@ -4,7 +4,7 @@ metadata:
   name: nginx-app
   namespace: nginx-app
 spec:
-  ingressClassName: ingress-nginx-apps
+  ingressClassName: traefik #ingress-nginx-apps
   rules:
   - host: www.essenov.com
     http:
