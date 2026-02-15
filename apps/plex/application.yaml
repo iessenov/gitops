@@ -7,9 +7,9 @@ spec:
   project: default
 
   sources:
-    - repoURL: https://github.com/plexinc/pms-docker/
-      chart: plex-media-server
-      targetRevision: 1.4.0
+    - repoURL: https://github.com/plexinc/pms-docker
+      path: charts/plex-media-server
+      targetRevision: master
       helm:
         valueFiles:
           - $values/apps/plex/values.yaml
