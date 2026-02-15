@@ -10,3 +10,5 @@ data:
   QBT_TORRENTING_PORT: "6881"
   TZ: "Europe/Sofia"
   UMASK: "002"
+  user: "admin"
+  password: "adminadmin"
