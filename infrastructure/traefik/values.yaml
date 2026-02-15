@@ -31,7 +31,7 @@ ingressRoute:
 
 # Service configuration - disabled when using hostPort with DaemonSet
 service:
-  enableYd: true
+  enabled: true
   type: NodePort
   externalIPs:
     - 192.168.100.22  # Node IP
