@@ -8,12 +8,6 @@ metadata:
 spec:
   project: default
 
-  resourceHealthAssessment:
-    rules:
-      - group: networking.k8s.io
-        kind: Ingress
-        health: Healthy
-
   sources:
     - repoURL: https://cowboysysop.github.io/charts/
       chart: whoami

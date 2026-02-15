@@ -6,12 +6,6 @@ metadata:
 spec:
   project: default
 
-  resourceHealthAssessment:
-    rules:
-      - group: networking.k8s.io
-        kind: Ingress
-        health: Healthy
-
   source:
     repoURL: https://github.com/iessenov/gitops.git
     targetRevision: main
