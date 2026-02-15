@@ -9,7 +9,7 @@ spec:
   - group: networking.k8s.io
     kind: Ingress
     jsonPointers:
-    - /status/loadBalancer
+    - /status
 
   sources:
     - repoURL: https://cowboysysop.github.io/charts/
