@@ -8,7 +8,7 @@ metadata:
   name: plex-config-pv
 spec:
   capacity:
-    storage: 500Mi
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce
   storageClassName: local-path
