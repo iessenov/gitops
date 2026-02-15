@@ -14,7 +14,7 @@ persistence:
   config:
     enabled: true
     storageClass: local-path
-    size: 500Mi
+    size: 2Gi
 
   transcode:
     enabled: true
