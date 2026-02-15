@@ -28,3 +28,13 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+
+  patches:
+    - target:
+        group: networking.k8s.io
+        kind: Ingress
+        name: whoami-helm
+      patch: |-
+        - op: add
+          path: /metadata/annotations/argocd.argoproj.io~1health-ignore
+          value: "true"
