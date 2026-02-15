@@ -7,21 +7,14 @@ ingress:
       paths:
         - /
 
+# -- PMS configuration
+pms:
+  storageClassName: local-path
+  configStorage: 2Gi
+
 # -- Configure persistence settings for the chart under this key.
 # @default -- See values.yaml
 persistence:
-
-  config:
-    enabled: true
-    storageClass: local-path
-    size: 2Gi
-    volumeName: plex-config-pv
-
-  transcode:
-    enabled: true
-    storageClass: local-path
-    size: 5Gi
-    volumeName: plex-transcode-pv
 
   media:
     enabled: true
