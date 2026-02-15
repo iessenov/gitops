@@ -5,6 +5,11 @@ metadata:
   namespace: argocd
 spec:
   project: default
+  ignoreDifferences:
+  - group: networking.k8s.io
+    kind: Ingress
+    jsonPointers:
+    - /status/loadBalancer
 
   sources:
     - repoURL: https://cowboysysop.github.io/charts/
