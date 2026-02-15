@@ -32,7 +32,7 @@ ingressRoute:
 # Service configuration - disabled when using hostPort with DaemonSet
 service:
   enabled: true
-  type: NodePort
+  type: LoadBalancer
   externalIPs:
     - 192.168.100.22  # Node IP
 
