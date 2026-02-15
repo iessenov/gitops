@@ -34,7 +34,7 @@ service:
   enabled: true
   type: LoadBalancer
   externalIPs:
-    - 192.168.100.22  # Node IP
+    - 192.168.100.22
 
 # Logs
 logs:
