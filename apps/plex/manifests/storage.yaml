@@ -14,6 +14,14 @@ spec:
   storageClassName: local-path
   local:
     path: /var/lib/plex/config
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: plex
+          operator: In
+          values:
+          - "true"
 ---
 # PV for Plex transcode
 # FOLDER TO CREATE: /var/lib/plex/transcode
@@ -30,6 +38,14 @@ spec:
   storageClassName: local-path
   local:
     path: /var/lib/plex/transcode
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: plex
+          operator: In
+          values:
+          - "true"
 ---
 # PV for Plex media
 # Your actual media files (movies, shows, music)
@@ -45,3 +61,11 @@ spec:
   storageClassName: local-path
   local:
     path: /media
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: plex
+          operator: In
+          values:
+          - "true"
