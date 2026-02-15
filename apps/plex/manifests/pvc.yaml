@@ -1,0 +1,15 @@
+---
+# Manually create the Plex config PVC so it has the storageClassName
+# This will be referenced by the Plex StatefulSet via pms.configExistingClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plex-config
+  namespace: plex
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 2Gi
