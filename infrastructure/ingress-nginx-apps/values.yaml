@@ -12,8 +12,8 @@ controller:
   hostPort:
     enabled: true
     ports:
-      http: 80
-      https: 443
+      http: 81
+      https: 8443
 
   service:
     enabled: false

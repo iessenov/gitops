@@ -8,18 +8,17 @@ deployment:
 # Ports configuration
 ports:
   web:
-    # HTTP port - using 801 to avoid collision with ingress-nginx
-    port: 8000
-    exposedPort: 801
-    hostPort: 801
+    port: 80 #The port your application listens on inside the container.
+    exposedPort: 80 # The port that the Service exposes to other pods inside the cluster.
+    hostPort: 80 # - The node itself exposes 80 (bypassing LoadBalancer/Ingress)
     expose:
       default: true
     protocol: TCP
   websecure:
     # HTTPS port
-    port: 8443
-    exposedPort: 4431
-    hostPort: 4431
+    port: 443
+    exposedPort: 431
+    hostPort: 431
     expose:
       default: true
     protocol: TCP
