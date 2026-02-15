@@ -13,4 +13,3 @@ ingress:
     - host: whoami-helm.essenov.com
       paths:
         - /
-  tls: []
