@@ -7,7 +7,8 @@ metadata:
 #    nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.100.0/24"
 #    nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
 spec:
-  ingressClassName: ingress-nginx-apps
+#  ingressClassName: ingress-nginx-apps
+  ingressClassName: traefik
   rules:
   - host: jellyfin.essenov.com
     http:
