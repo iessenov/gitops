@@ -16,7 +16,6 @@ pms:
   configStorage: 2Gi
   configExistingClaim: "plex-config"
 
-
 # -- Additional volume mounts for media and transcode
 extraVolumeMounts:
   - name: media
