@@ -16,21 +16,16 @@ pms:
   configStorage: 2Gi
   configExistingClaim: "plex-config"
 
-# -- Additional volume mounts for media and transcode
+# -- Additional volume mounts for media
 extraVolumeMounts:
   - name: media
     mountPath: /media
-  - name: transcode
-    mountPath: /transcode
 
 # -- Additional volumes using PersistentVolumeClaims
 extraVolumes:
   - name: media
     persistentVolumeClaim:
       claimName: plex-media
-  - name: transcode
-    persistentVolumeClaim:
-      claimName: plex-transcode
 
 # -- Enable devices to be discoverable
 hostNetwork: true
