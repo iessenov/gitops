@@ -2,6 +2,9 @@ ingress:
   enabled: true
   ingressClassName: traefik
   pathType: Prefix
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
   hosts:
     - host: plex.essenov.com
       paths:

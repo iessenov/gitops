@@ -69,3 +69,50 @@ spec:
           operator: In
           values:
           - "true"
+---
+# Manually create the Plex config PVC so it has the storageClassName
+# This will be referenced by the Plex StatefulSet via pms.configExistingClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plex-config
+  namespace: plex
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 2Gi
+---
+# PVC for Plex transcode
+# This binds to plex-transcode-pv
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plex-transcode
+  namespace: plex
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: plex-transcode-pv
+---
+# PVC for Plex media
+# This binds to plex-media-pv
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plex-media
+  namespace: plex
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 2Ti
+  volumeName: plex-media-pv
