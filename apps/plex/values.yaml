@@ -23,7 +23,7 @@ persistence:
     enabled: true
     storageClass: local-path
     mountPath: /media
-    size: 2Ti
+    size: 70Gi
     existingClaim: plex-media
     
   transcode:

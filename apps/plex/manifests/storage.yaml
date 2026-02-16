@@ -55,7 +55,7 @@ metadata:
   name: plex-media-pv
 spec:
   capacity:
-    storage: 2Ti
+    storage: 70Gi
   accessModes:
     - ReadWriteOnce
   storageClassName: local-path
@@ -114,5 +114,5 @@ spec:
   storageClassName: local-path
   resources:
     requests:
-      storage: 2Ti
+      storage: 70Gi
   volumeName: plex-media-pv
