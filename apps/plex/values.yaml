@@ -16,22 +16,22 @@ pms:
   configStorage: 2Gi
   configExistingClaim: "plex-config"
 
-# -- Configure persistence settings for the chart under this key.
-# @default -- See values.yaml
-persistence:
-  media:
-    enabled: true
-    storageClass: local-path
+
+# -- Additional volume mounts for media and transcode
+extraVolumeMounts:
+  - name: media
     mountPath: /media
-    size: 70Gi
-    existingClaim: plex-media
-    
-  transcode:
-    enabled: true
-    storageClass: local-path
+  - name: transcode
     mountPath: /transcode
-    size: 5Gi
-    existingClaim: plex-transcode
+
+# -- Additional volumes using PersistentVolumeClaims
+extraVolumes:
+  - name: media
+    persistentVolumeClaim:
+      claimName: plex-media
+  - name: transcode
+    persistentVolumeClaim:
+      claimName: plex-transcode
 
 # -- Enable devices to be discoverable
 hostNetwork: true
