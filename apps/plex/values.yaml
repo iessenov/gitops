@@ -19,13 +19,19 @@ pms:
 # -- Configure persistence settings for the chart under this key.
 # @default -- See values.yaml
 persistence:
-
   media:
     enabled: true
     storageClass: local-path
     mountPath: /media
     size: 2Ti
-    volumeName: plex-media-pv
+    existingClaim: plex-media
+    
+  transcode:
+    enabled: true
+    storageClass: local-path
+    mountPath: /transcode
+    size: 5Gi
+    existingClaim: plex-transcode
 
 # -- Enable devices to be discoverable
 hostNetwork: true
