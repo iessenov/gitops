@@ -1,0 +1,78 @@
+# Docs at https://cloudnative-pg.io/docs/1.28/quickstart
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: shared-postgresql
+spec:
+  instances: 3
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.3
+  # The immutable infrastructure paradigm requires that you always point to a specific version of the container image. 
+  # Never use tags like latest or 13 in a production environment as it might lead to unpredictable scenarios in terms of update policies and version consistency in the cluster. 
+
+  # Persistent storage configuration
+  storage:
+    size: 20Gi
+    pvcTemplate:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: standard
+      volumeMode: Filesystem
+
+  # Bootstrap only creates the FIRST database
+  bootstrap:
+    initdb:
+      database: app1db
+      owner: app1user
+      secret:
+        name: app1-secret
+      postInitApplicationSQLRefs:
+        configMapRefs:
+          - name: create-databases-sql
+            key: create-databases.sql
+
+  # Managed roles for all application users
+  managed:
+    roles:
+      - name: app1user
+        passwordSecret:
+          name: app1-secret
+      - name: app2user
+        passwordSecret:
+          name: app2-secret
+      - name: app3user
+        passwordSecret:
+          name: app3-secret
+
+  postgresql:
+    parameters:
+      max_connections: "200"
+      shared_buffers: "512MB"
+
+  monitoring:
+    enablePodMonitor: true
+
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+
+  affinity:
+    enablePodAntiAffinity: true
+
+  enableSuperuserAccess: true # Disable for Production environments
+  superuserSecret:
+    name: postgres-superuser
+
+  #nodeMaintenanceWindow:
+  #  inProgress: false
+  #  reusePVC: false
+
+  # Backup configuration
+  #   add later

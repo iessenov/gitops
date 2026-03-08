@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: app2-pooler
+spec:
+  cluster:
+    name: shared-postgresql
+  instances: 1
+  type: rw
+  pgbouncer:
+    poolMode: transaction

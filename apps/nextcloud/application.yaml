@@ -1,27 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: whoami-helm
+  name: nextcloud
   namespace: argocd
 spec:
   project: default
-
   sources:
-    - repoURL: https://cowboysysop.github.io/charts/
-      chart: whoami
-      targetRevision: HEAD
+    - repoURL: https://github.com/nextcloud/helm
+      path: charts/nextcloud
+      targetRevision: main
       helm:
         valueFiles:
-          - $values/apps/whoami-helm/values.yaml
-
+          - $values/apps/nextcloud/values.yaml
     - repoURL: https://github.com/iessenov/gitops.git
+      path: apps/plex/manifests
       targetRevision: main
       ref: values
-
   destination:
     server: https://kubernetes.default.svc
-    namespace: whoami-helm
-
+    namespace: nextcloud
   syncPolicy:
     automated:
       prune: true

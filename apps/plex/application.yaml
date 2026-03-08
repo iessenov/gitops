@@ -14,7 +14,7 @@ spec:
         valueFiles:
           - $values/apps/plex/values.yaml
     - repoURL: https://github.com/iessenov/gitops.git
-      targetRevision: HEAD
+      targetRevision: Hmain
       ref: values
     - repoURL: https://github.com/iessenov/gitops.git
       path: apps/plex/manifests

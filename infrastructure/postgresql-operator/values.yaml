@@ -1,0 +1,8 @@
+#image:
+#  tag: 1.28.0
+
+#metrics:
+#  enabled: true
+
+#webhook:
+#  enabled: true
