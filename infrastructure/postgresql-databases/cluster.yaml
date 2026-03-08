@@ -29,10 +29,9 @@ spec:
       owner: app1user
       secret:
         name: app1-secret
-      postInitApplicationSQLRefs:
-        configMapRefs:
-          - name: create-databases-sql
-            key: create-databases.sql
+      postInitSQL:
+        - CREATE DATABASE app2db OWNER app2user;
+        - CREATE DATABASE app3db OWNER app3user;
 
   # Managed roles for all application users
   managed:
