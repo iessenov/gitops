@@ -13,7 +13,7 @@ spec:
         valueFiles:
           - $values/apps/nextcloud/values.yaml
     - repoURL: https://github.com/iessenov/gitops.git
-      path: apps/plex/manifests
+      path: apps/nextcloud/manifests
       targetRevision: main
       ref: values
   destination:
