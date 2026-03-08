@@ -30,6 +30,8 @@ spec:
       secret:
         name: app1-secret
       postInitSQL:
+        - CREATE ROLE app2user LOGIN;
+        - CREATE ROLE app3user LOGIN;
         - CREATE DATABASE app2db OWNER app2user;
         - CREATE DATABASE app3db OWNER app3user;
 
