@@ -24,3 +24,10 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
       - Prune=false
+  
+  ignoreDifferences:
+    - group: postgresql.cnpg.io
+      kind: Cluster
+      jsonPointers:
+        - /spec/storage/resizeInUseVolumes
+        - /status
