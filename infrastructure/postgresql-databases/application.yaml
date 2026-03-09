@@ -36,4 +36,5 @@ spec:
         - cnpg-controller-manager
       jsonPointers:
         - /spec/storage/resizeInUseVolumes
+        - /spec/managed/roles
         - /status
