@@ -21,7 +21,7 @@ spec:
           storage: 5Gi
       storageClassName: local-path
       volumeMode: Filesystem
-      resizeInUseVolumes: true
+    resizeInUseVolumes: true
 
   # Bootstrap only creates the FIRST database
   bootstrap:
