@@ -12,6 +12,7 @@ spec:
     path: infrastructure/postgresql-databases
     directory:
       recurse: true
+      exclude: application.yaml
       
   destination:
     server: https://kubernetes.default.svc
