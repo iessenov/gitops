@@ -29,6 +29,9 @@ spec:
   ignoreDifferences:
     - group: postgresql.cnpg.io
       kind: Cluster
+      managedFieldsManagers:
+        - cloudnative-pg
+        - cnpg-controller-manager
       jsonPointers:
         - /spec/storage/resizeInUseVolumes
         - /status
