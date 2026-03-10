@@ -28,7 +28,7 @@ spec:
       - ServerSideApply=true
       - Prune=false
   
-  ignoreDifferences:
+  ignoreDifferences:  # Ignore differences in the Cluster resource that are expected due to the nature of the managed roles and storage resizing
     - group: postgresql.cnpg.io
       kind: Cluster
       managedFieldsManagers:
