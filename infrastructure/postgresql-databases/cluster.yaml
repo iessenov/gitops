@@ -40,12 +40,15 @@ spec:
   managed:
     roles:
       - name: app1user
+        login: true
         passwordSecret:
           name: app1-secret
       - name: app2user
+        login: true
         passwordSecret:
           name: app2-secret
       - name: app3user
+        login: true
         passwordSecret:
           name: app3-secret
 
