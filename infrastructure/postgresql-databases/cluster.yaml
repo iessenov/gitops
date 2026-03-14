@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 3
 
-  imageName: ghcr.io/cloudnative-pg/postgresql:18.3-pg16
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.3
   # The immutable infrastructure paradigm requires that you always point to a specific version of the container image. 
   # Never use tags like latest or 13 in a production environment as it might lead to unpredictable scenarios in terms of update policies and version consistency in the cluster. 
 
